@@ -6,7 +6,6 @@
 #define JOY_DEADZONE		5000
 
 
-#ifndef _TINSPIRE
 enum KeyNames
 {
 	KEY_D_SLOMO	= SDLK_0,
@@ -19,7 +18,7 @@ enum KeyNames
 	KEY_DOWN	= SDLK_DOWN,
 	KEY_OK		= SDLK_LCTRL
 };
-#endif
+
 
 #ifdef JOYSTICK
 typedef enum JoystickMode

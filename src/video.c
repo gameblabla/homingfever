@@ -192,8 +192,8 @@ void clipImage(SDL_Rect *source, int tileWidth, int tileHeight, int rowLength, i
 
 void drawImage(SDL_Surface *source, SDL_Rect *clip, SDL_Surface *destination, int x, int y)
 {
+	SDL_UnlockSurface(screen);
 	SDL_Rect offset;
-
 	offset.x = x;
 	offset.y = y;
 

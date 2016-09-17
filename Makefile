@@ -1,4 +1,4 @@
-PLATFORM = unix
+PLATFORM = nspire
 
 ifeq ($(PLATFORM), gcw0)
 	CC		:= /opt/gcw0-toolchain/usr/bin/mipsel-linux-gcc
@@ -33,7 +33,7 @@ ifeq ($(PLATFORM), nspire)
 	CC		:= nspire-gcc
 	STRIP		:= 
 	SYSROOT		:= $(shell $(CC) --print-sysroot)
-	CFLAGS		:= -I$(HOME)/Ndless/ndless-sdk/include/SDL -DSCREEN_SCALE=1 -DJOYSTICK=0
+	CFLAGS		:= -I$(HOME)/Ndless/ndless-sdk/include/SDL -DSCREEN_SCALE=1
 	CFLAGS	+= -Ofast -fdata-sections -ffunction-sections 
 	CFLAGS	+= -marm -march=armv5te -mtune=arm926ej-s -fno-ipa-sra -Wall -Wextra
 	LDFLAGS		:= -Wl,--as-needed -Wl,--gc-sections -flto -lSDL -lm

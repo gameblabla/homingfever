@@ -13,7 +13,12 @@
 #define PLAYER_PENALTY_TIME	(60*8)
 #define GAME_OVER_TIME		(60*3)
 #define SCORE_BLINKING_INTERVAL	15
+
+#ifdef _TINSPIRE
+#define PAUSE_RESUME_TIME	15
+#else
 #define PAUSE_RESUME_TIME	(60*2)
+#endif
 
 extern listElement *objListHead;
 extern object *playerObj;

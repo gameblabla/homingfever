@@ -440,11 +440,11 @@ void objectDraw(object *obj)
 
 		angle = (360 - obj->angle)/divisor;
 
-		if (obj->type == OBJ_CLOUD || obj->type == OBJ_SMOKE)
+		/*if (obj->type == OBJ_CLOUD || obj->type == OBJ_SMOKE)
 			SDL_SetAlpha(obj->tiles->image, SDL_SRCALPHA, obj->ttl > 60 ? 255 : 256/60 * obj->ttl);
 		else if (obj->type == OBJ_MISSILE_RED || obj->type == OBJ_MISSILE_BLUE || obj->type == OBJ_MISSILE_YELLOW)
 			SDL_SetAlpha(obj->tiles->image, SDL_SRCALPHA, obj->ttl > 30 ? 255 : 256/30 * obj->ttl);
-
+		*/
 		drawImage(obj->tiles->image, &obj->tiles->clip[angle%obj->tiles->length], screen, MOD((int)obj->x - camera.x, LEVEL_W), MOD((int)obj->y - camera.y, LEVEL_H));
 	}
 	else if (obj->type == OBJ_MISSILE_RED || obj->type == OBJ_MISSILE_BLUE || obj->type == OBJ_MISSILE_YELLOW)
