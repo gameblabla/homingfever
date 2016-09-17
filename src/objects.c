@@ -1,6 +1,7 @@
 #include "objects.h"
 
 #include <math.h>
+#include <string.h>
 #include "game.h"
 #include "helpers.h"
 #include "input.h"
@@ -191,6 +192,7 @@ void objectLogic(object *obj)
 		int penaltyRange = 70;
 		int inPenaltyRange = 0;
 
+#ifdef JOYSTICK
 		if (joyMode == JOY_MODE_ANALOG && !(joyData.inDeadzoneX && joyData.inDeadzoneY))
 		{
 			int step = PLAYER_ROTATION;
@@ -228,6 +230,7 @@ void objectLogic(object *obj)
 			obj->angle = MOD(obj->angle, SINE_STEPS);
 		}
 
+#endif
 		obj->vx = -PLAYER_SPEED * sineTable[obj->angle];
 		obj->vy = -PLAYER_SPEED * sineTable[(obj->angle+90)%SINE_STEPS];
 

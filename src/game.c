@@ -2,6 +2,7 @@
 
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 #include "debug.h"
 #include "fileio.h"
 #include "font.h"
@@ -142,6 +143,7 @@ void gameLogic()
 			gamePausedTimer = 0;
 		}
 	}
+#ifdef JOYSTICK
 	if (keys[KEY_LEFT] && !gamePaused && joyData.inDeadzoneX && joyData.inDeadzoneY)
 	{
 		playerObj->angle = MOD(playerObj->angle + PLAYER_ROTATION, SINE_STEPS);
@@ -151,6 +153,17 @@ void gameLogic()
 	{
 		playerObj->angle = MOD(playerObj->angle - PLAYER_ROTATION, SINE_STEPS);
 	}
+#else
+	if (keys[KEY_LEFT] && !gamePaused)
+	{
+		playerObj->angle = MOD(playerObj->angle + PLAYER_ROTATION, SINE_STEPS);
+
+	}
+	if (keys[KEY_RIGHT] && !gamePaused)
+	{
+		playerObj->angle = MOD(playerObj->angle - PLAYER_ROTATION, SINE_STEPS);
+	}
+#endif
 /*	if (keys[KEY_UP])*/
 /*	{*/
 /*	}*/

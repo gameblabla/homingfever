@@ -5,11 +5,13 @@
 
 SDL_Event event;
 int keys[2048];
+#ifdef JOYSTICK
 SDL_Joystick *joyDevice;
 int joyNum;
 JoystickMode joyMode = JOY_MODE_ANALOG;
 JoystickData joyData = {0, 0, 1, 1};
 int joyDeadzone = JOY_DEADZONE;
+#endif
 
 void input()
 {
@@ -26,6 +28,7 @@ void input()
 			case SDL_KEYUP:				/* Key release. */
 				keys[event.key.keysym.sym] = 0;
 			break;
+#ifdef JOYSTICK
 			case SDL_JOYHATMOTION:			/* Joystick hat movement. */
 				keys[SDLK_UP] = event.jhat.value & SDL_HAT_UP;
 				keys[SDLK_DOWN] = event.jhat.value & SDL_HAT_DOWN;
@@ -133,7 +136,7 @@ void input()
 					break;
 				}
 			break;
-
+#endif
 			default:
 			break;
 		}

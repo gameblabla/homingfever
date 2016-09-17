@@ -5,6 +5,8 @@
 
 #define JOY_DEADZONE		5000
 
+
+#ifndef _TINSPIRE
 enum KeyNames
 {
 	KEY_D_SLOMO	= SDLK_0,
@@ -17,7 +19,9 @@ enum KeyNames
 	KEY_DOWN	= SDLK_DOWN,
 	KEY_OK		= SDLK_LCTRL
 };
+#endif
 
+#ifdef JOYSTICK
 typedef enum JoystickMode
 {
 	JOY_MODE_DISABLED = 0,
@@ -33,12 +37,14 @@ typedef struct JoystickData
 	int inDeadzoneY;
 } JoystickData;
 
-extern int keys[2048];
 extern SDL_Joystick *joyDevice;
 extern int joyNum;
 extern JoystickMode joyMode;
 extern JoystickData joyData;
 extern int joyDeadzone;
+#endif
+
+extern int keys[2048];
 
 void input();
 

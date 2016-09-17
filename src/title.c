@@ -1,5 +1,7 @@
 #include "title.h"
 
+#include <string.h>
+
 #include "font.h"
 #include "game.h"
 #include "input.h"
@@ -91,8 +93,8 @@ void titleLogic()
 
 void titleDraw()
 {
-	int i;
-	int fontX = SCREEN_W/2 - (strlen("H O M I N G     F E V E R") * (gameFont.w + gameFont.tracking))/2;
+	unsigned short i;
+	short fontX = SCREEN_W/2 - (strlen("H O M I N G     F E V E R") * (gameFont.w + gameFont.tracking))/2;
 	int fontStep = (missile.x < fontX ? 0 : missile.x - fontX);
 	char bestTimeStr[10] = "-'--\"--";
 	char text[TEXT_PAGES][TEXT_LINES][TEXT_LINE_LEN];
@@ -101,8 +103,13 @@ void titleDraw()
 		sprintf(bestTimeStr, "%d'%02d\"%02d", bestTime/60/60, bestTime/60%60, bestTime%60*1000/600);
 
 	memset(text, 0, TEXT_PAGES*TEXT_LINES*TEXT_LINE_LEN);
+#ifdef _TINSPIRE
+	sprintf(text[0][1], "Press CTRL to play");
+	sprintf(text[0][3], "ESC to exit");
+#else
 	sprintf(text[0][1], "Press A or START to play");
 	sprintf(text[0][3], "or SELECT to exit");
+#endif
 
 	sprintf(text[1][0], "Best time");
 	sprintf(text[1][1], "%s", bestTimeStr);
@@ -144,7 +151,7 @@ void titleDraw()
 
 	if (missile.x >= SCREEN_W)
 	{
-		int i;
+		unsigned short i;
 
 		showIntro = 0;
 		++textTimer;

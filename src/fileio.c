@@ -36,7 +36,11 @@ void getConfig()
 	char config[FILE_MAX_PATH];
 	char line[100];
 
+#ifdef _TINSPIRE
+	if (snprintf(config, FILE_MAX_PATH, "%s/game.cfg.tns", configDir) >= FILE_MAX_PATH)
+#else
 	if (snprintf(config, FILE_MAX_PATH, "%s/game.cfg", configDir) >= FILE_MAX_PATH)
+#endif
 	{
 		printf("Failed to retrieve config file path.\n");
 		return;
@@ -64,12 +68,14 @@ void getConfig()
 		if (line[0] == '#')
 			continue;
 
+#ifdef JOYSTICK
 		if (!strcmp(line, "JOY_MODE"))
 			sscanf(arg, "%d", (int *)&joyMode);
 		else if (!strcmp(line, "JOY_NUM"))
 			sscanf(arg, "%d", (int *)&joyNum);
 		else if (!strcmp(line, "JOY_DEADZONE"))
 			sscanf(arg, "%d", (int *)&joyDeadzone);
+#endif
 		else if (!strcmp(line, "SCALE") && !screenScale)
 			sscanf(arg, "%d", (int *)&screenScale);
 		else if (!strcmp(line, "FULLSCREEN"))
@@ -84,7 +90,11 @@ void storeConfig()
 	FILE *f;
 	char config[FILE_MAX_PATH];
 
+#ifdef _TINSPIRE
+	if (snprintf(config, FILE_MAX_PATH, "%s/game.cfg.tns", configDir) >= FILE_MAX_PATH)
+#else
 	if (snprintf(config, FILE_MAX_PATH, "%s/game.cfg", configDir) >= FILE_MAX_PATH)
+#endif
 	{
 		printf("Failed to retrieve config file path.\n");
 		return;
@@ -98,12 +108,14 @@ void storeConfig()
 		return;
 	}
 
+#ifdef JOYSTICK
 	fprintf(f, "# Joystick control mode. Value: 0 - off, 1 - digital, 2 - analog\n");
 	fprintf(f, "JOY_MODE %d\n\n", joyMode);
 	fprintf(f, "# Joystick device number. Value: 0 - first joystick, 1 - second joystick, etc.\n");
 	fprintf(f, "JOY_NUM %d\n\n", joyNum);
 	fprintf(f, "# Joystick deadzone. Value range: 0 - 65535\n");
 	fprintf(f, "JOY_DEADZONE %d\n\n", joyDeadzone);
+#endif
 	fprintf(f, "# Screen scale. Value: 1 - original, 2 - double\n");
 	fprintf(f, "SCALE %d\n\n", screenScale);
 	fprintf(f, "# Display mode. Value: 0 - windowed, 1 - fullscreen\n");
@@ -120,7 +132,11 @@ void getHiscore()
 	char header[] = HISCORE_HEADER;
 	uint8_t version;
 
+#ifdef _TINSPIRE
+	if (snprintf(save, FILE_MAX_PATH, "%s/score.dat.tns", configDir) >= FILE_MAX_PATH)
+#else
 	if (snprintf(save, FILE_MAX_PATH, "%s/score.dat", configDir) >= FILE_MAX_PATH)
+#endif
 	{
 		printf("Failed to retrieve save file path.\n");
 		return;
@@ -164,7 +180,11 @@ void storeHiscore()
 	char header[] = HISCORE_HEADER;
 	uint8_t version = HISCORE_FORMAT_VERSION;
 
+#ifdef _TINSPIRE
+	if (snprintf(save, FILE_MAX_PATH, "%s/score.dat.tns", configDir) >= FILE_MAX_PATH)
+#else
 	if (snprintf(save, FILE_MAX_PATH, "%s/score.dat", configDir) >= FILE_MAX_PATH)
+#endif
 	{
 		printf("Failed to retrieve save file path.\n");
 		return;

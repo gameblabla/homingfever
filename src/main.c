@@ -2,6 +2,10 @@
 
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
+#ifdef _TINSPIRE
+#include <libndls.h>
+#endif
 #include "fileio.h"
 #include "font.h"
 #include "input.h"
@@ -43,6 +47,9 @@ void deinit()
 
 int main(int argc, char *argv[])
 {
+#ifdef _TINSPIRE
+	enable_relative_paths(argv);
+#endif
 	int i;
 	quit = 0;
 

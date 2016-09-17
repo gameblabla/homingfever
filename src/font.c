@@ -1,6 +1,7 @@
 #include "font.h"
 
 #include <SDL.h>
+#include <string.h>
 #include "game.h"
 #include "video.h"
 
